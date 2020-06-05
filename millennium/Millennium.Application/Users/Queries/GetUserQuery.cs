@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Millennium.Application.Repositories;
 using Millennium.Domain;
@@ -22,6 +23,11 @@ namespace Millennium.Application.Users.Queries
             var user = await _repository.GetAsync<User>(
                 UserId,
                 cancellationToken);
+
+            if (user == null)
+            {
+                throw new ArgumentException($"User with id {UserId} was not found.");
+            }
 
             return new UserDto(
                 user.Name,

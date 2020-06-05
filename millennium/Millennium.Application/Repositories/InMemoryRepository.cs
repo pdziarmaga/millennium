@@ -28,7 +28,7 @@ namespace Millennium.Application.Repositories
         {
             var thisTypeList = _data[typeof(T)];
 
-            var entity = thisTypeList.Cast<IEntity>().Single(x => x.Id == id);
+            var entity = thisTypeList.Cast<IEntity>().SingleOrDefault(x => x.Id == id);
 
             if (entity == null)
             {
